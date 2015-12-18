@@ -14,5 +14,8 @@
     "babel-core": "^6.3.21",
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.3.13"
+  },
+  "dependencies": {
+    "rx-dom": "^7.0.3"
   }
 }
