@@ -1,31 +1,31 @@
 *, *:before, *:after {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 #canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 512px;
-    height: 512px;
-    background-size: cover;
-    overflow: hidden;
-    -moz-transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
-    background: url(gfx/clouds.svg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 512px;
+  height: 512px;
+  background-size: cover;
+  overflow: hidden;
+  -moz-transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  background: url(gfx/clouds.svg);
 }
 
 .butterfly {
-    position: absolute;
-    width: 64px;
-    height: 64px;
-    top: 276px;
-    left: 64px;
-    background: url(gfx/butterfly.svg) no-repeat;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  top: 276px;
+  left: 64px;
+  background: url(gfx/butterfly.svg) no-repeat;
 }
