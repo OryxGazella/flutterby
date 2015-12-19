@@ -3,8 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Flutter By</title>
+    <link rel="stylesheet" type="text/css" href="./game.css">
 </head>
 <body>
+<div id="canvas"></div>
+
+<script type="text/javascript">
+    (function () {
+        function resizeCanvas() {
+            var canvas = document.getElementById("canvas");
+            var scale = window.innerHeight / canvas.clientHeight;
+            canvas.style.mozTransform = "scale(" + scale + ")";
+            canvas.style.webkitTransform = "scale(" + scale + ")";
+            canvas.style.transform = "scale(" + scale + ")";
+            canvas.style.width = (window.innerWidth / scale) + "px";
+        }
+
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+    })();
+</script>
 
 <!--suppress HtmlUnknownTarget -->
 <script src="index.js"></script>
