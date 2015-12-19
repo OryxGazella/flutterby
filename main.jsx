@@ -1,4 +1,3 @@
-import Rx from 'rx-dom'
 import UserControlStream from './usercontrols'
 import React from 'react'
 import ReactDOM from 'react-dom'

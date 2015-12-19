@@ -1,3 +1,4 @@
+import Rx from 'rx-lite'
 const Mousetrap = require('mousetrap')
 
 function bindKey(key) {
