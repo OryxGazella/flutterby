@@ -1,8 +1,12 @@
 module.exports = {
-  entry: "./main.jsx",
+  entry: "./src/main.ts",
   output: {
     path: __dirname,
     filename: "index.js"
+  },
+  resolve: {
+    // Add `.ts` and `.tsx` as a resolvable extension.
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
   },
   devServer: {
     inline: true,
@@ -11,13 +15,17 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
+        test: /\.ts$/,
+        loader: 'ts-loader',
         query: {
-          presets: ['es2015']
-        }
-      }
-    ]
+          'ignoreDiagnostics': [
+            2403, // 2403 -> Subsequent variable declarations
+            2300, // 2300 -> Duplicate identifier
+            2374, // 2374 -> Duplicate number index signature
+            2375  // 2375 -> Duplicate string index signature
+          ]
+        },
+        exclude: [/\.(spec|e2e)\.ts$/, /node_modules/]
+      }]
   }
 };
