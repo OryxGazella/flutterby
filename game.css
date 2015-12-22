@@ -26,5 +26,14 @@
   width: 64px;
   height: 64px;
   background: url(gfx/butterfly.svg) no-repeat;
-  transition: ease .02s;
+  transition: ease-in-out .04s;
+  transform-style: preserve-3d;
+}
+
+.laser {
+  position: absolute;
+  width: 16px;
+  height: 64px;
+  background: url(gfx/laser.svg) no-repeat;
+  transform-style: preserve-3d;
 }
