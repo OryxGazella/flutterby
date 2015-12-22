@@ -1,35 +1,36 @@
-import 'mousetrap'
-
-import {Observable, Subject} from 'rx'
-
-function bindKey(key):Subject<string> {
-  let sub = new Subject<string>()
-  Mousetrap.bind(key, () => {
-    sub.onNext(key)
-  })
-  return sub
-}
+import {Observable} from 'rx'
 
 export enum Action {
-  MoveLeft,
-  MoveRight,
-  MoveUp,
-  MoveDown,
-  Fire
+  MoveLeft = 37,
+  MoveRight = 39,
+  MoveUp = 38,
+  MoveDown = 40,
+  Fire = 32
 }
 
-export const UserControlStream:Observable<Action> = Observable.merge(
-  bindKey('space'),
-  bindKey('left'),
-  bindKey('right'),
-  bindKey('down'),
-  bindKey('up'))
-  .map(eventString => {
-    if(eventString === 'up') return Action.MoveUp
-    if(eventString === 'down') return Action.MoveDown
-    if(eventString === 'left') return Action.MoveLeft
-    if(eventString === 'right') return Action.MoveRight
-    if(eventString === 'space') return Action.Fire
-    return null
-  })
-  .filter(key => key != null)
+export interface Controls {
+  MoveLeft:boolean,
+  MoveRight:boolean,
+  MoveUp:boolean,
+  MoveDown:boolean,
+  Fire:boolean
+}
+
+const initialKeys = {
+  [Action[Action.MoveDown]]: false,
+  [Action[Action.MoveLeft]]: false,
+  [Action[Action.MoveRight]]: false,
+  [Action[Action.MoveUp]]: false,
+  [Action[Action.Fire]]: false,
+};
+
+export const UserControlStream:Observable<Controls> = Observable.merge(
+  Observable.fromEvent(document, 'keydown'),
+  Observable.fromEvent(document, 'keyup'))
+  .distinctUntilChanged((evt:KeyboardEvent) => (evt.key || evt.keyCode + evt.type))
+  .filter((e:KeyboardEvent) => Action[e.key || e.keyCode] != null)
+  .scan((acc, event:KeyboardEvent) => {
+    acc[Action[event.key || event.keyCode]] = event.type === 'keydown'
+    return acc
+  }, initialKeys)
+  .startWith(initialKeys)

@@ -1,32 +1,30 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import {UserControlStream} from './usercontrols'
 import {ScreenComponent} from './ScreenComponent'
 import renderScene from './renderFunctions'
-import {Action} from "./usercontrols";
+import {UserControlStream, Action, Controls} from "./usercontrols";
 import Rx = require('rx')
-import Observable = Rx.Observable;
 
-const tileWidth = 32;
+const tileWidth = 8;
 const initialButterfly = {
   id: 'butterfly',
-  x: 0,
-  y: 0,
+  x: 256 - 32,
+  y: 256 - 32,
 }
 
-function offset(action:Action, applicableAction:Action,offset:number):number {
-  return action === applicableAction ? offset : 0
+function offset(controls:Controls, action:Action,offset:number):number {
+  return controls[Action[action]] ? offset : 0
 }
 
 UserControlStream
-  .scan((b, action) => ({
+  .combineLatest(Rx.Observable.interval(16), Rx.helpers.identity)
+  .sample(16)
+  .scan((b, controls) => ({
     id: b.id,
-    x: b.x + offset(action, Action.MoveRight, tileWidth) + offset(action, Action.MoveLeft, -tileWidth),
-    y: b.y + offset(action, Action.MoveUp, -tileWidth) + offset(action, Action.MoveDown, tileWidth),
-
+    x: b.x + offset(controls, Action.MoveRight, tileWidth) + offset(controls, Action.MoveLeft, -tileWidth),
+    y: b.y + offset(controls, Action.MoveUp, -tileWidth) + offset(controls, Action.MoveDown, tileWidth),
   }), initialButterfly)
   .startWith(initialButterfly)
-  .sample(100)
   .subscribe(b => {
     renderScene([b])
   })

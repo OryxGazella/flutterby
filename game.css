@@ -11,8 +11,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 1344px;
-  height: 704px;
+  width: 640px;
+  height: 512px;
   background-size: cover;
   overflow: hidden;
   -moz-transform-origin: 0 0;
@@ -26,5 +26,5 @@
   width: 64px;
   height: 64px;
   background: url(gfx/butterfly.svg) no-repeat;
-  transition: ease .2s;
+  transition: ease .02s;
 }
