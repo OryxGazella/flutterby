@@ -1,6 +1,4 @@
 *, *:before, *:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -15,8 +13,6 @@
   height: 512px;
   background-size: cover;
   overflow: hidden;
-  -moz-transform-origin: 0 0;
-  -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
   background: url(gfx/clouds.svg);
 }
@@ -26,7 +22,6 @@
   width: 64px;
   height: 64px;
   background: url(gfx/butterfly.svg) no-repeat;
-  transition: ease-in-out .04s;
   transform-style: preserve-3d;
 }
 
