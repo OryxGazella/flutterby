@@ -35,10 +35,11 @@ UserControlStream
     laser: {
       id: scene.laser.id,
       x: scene.laser.x,
-      y: scene.laser.y < -256 ? (112 + 96 * 2) : (scene.laser.y - (tick % 26))
+      y: scene.laser.y - (tick % 26)
     }
   }), initialScene)
   .startWith(initialScene)
+  .sample(50)
   .subscribe(scene => {
-    renderScene([scene.butterfly, scene.laser])
+    renderScene(scene.butterfly, scene.laser)
   })
